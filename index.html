@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P5 Sketch</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.3.0/p5.min.js"
+      integrity="sha512-tGZFF1kxT/c9C+kv77mKkZ9Ww1VyU8TMX6HLUSzbPrDLuptbiRFBfti8A33ip+BBIHYUsybuZD9OKLmIqdLmaQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="sketch2.js"></script>
+    <script src="sketch.js"></script>
+    <!-- <script src="drawingfunctions.js"></script>
+    <script src="utilityfunctions.js"></script> -->
+  </head>
+  <body>
+    <form class="controlContainer">
+      <label>Time Value:</label>
+      <input
+      type="range"
+      min="0"
+      max="99"
+      value="50"
+      class="slider"
+      id="sliderTimeVal"
+      />
+      <label>Show Lerps:</label>
+      <input
+        type="checkbox"
+        class="slider"
+        id="boolShowLerps"
+      />
+    </form>
+    <div id="canvas"></div>
+    <div id="canvas2"></div>
+  </body>
+</html>
