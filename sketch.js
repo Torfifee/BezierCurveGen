@@ -1,4 +1,4 @@
-// import * as drawfn from "./drawingfunctions.js";
+// import { addPoints } from "./js_functions/drawingfunctions";
 
 lerpTime = 0.2;
 
@@ -37,7 +37,7 @@ var drawingspace = function (drawingCanvas) {
   };
 
   drawingCanvas.keyPressed = function () {
-    if (key == "x" && pointsList.length > 0) {
+    if (drawingCanvas.key == "x" && pointsList.length > 0) {
       pointsList.pop();
     } else {
     }
@@ -66,15 +66,15 @@ var drawingspace = function (drawingCanvas) {
       }
 
       if (editpoint === -1) {
-        addPoints();
+        addPoints(drawingCanvas);
       }
     }
   };
 
-  // drawingCanvas.mouseReleased = function(){
-  //   drawingCanvas.print("mouseRealesed"  )
-  //   editpoint = -1;
-  // }
+  drawingCanvas.mouseReleased = function () {
+    drawingCanvas.print("mouseRealesed");
+    editpoint = -1;
+  };
 };
 
 var myp5 = new p5(drawingspace, "canvas");
@@ -87,14 +87,14 @@ function movePoints(canvas) {
     canvas.mouseY < canvas.height
   ) {
     if (canvas.mouseIsPressed && editpoint !== -1) {
-      pointsList[editpoint].x = mouseX;
-      pointsList[editpoint].y = mouseY;
+      pointsList[editpoint].x = canvas.mouseX;
+      pointsList[editpoint].y = canvas.mouseY;
     }
   }
 }
 
-const addPoints = () => {
-  pointsList.push(drawingCanvas.createVector(mouseX, mouseY));
+const addPoints = (canvas) => {
+  pointsList.push(canvas.createVector(canvas.mouseX, canvas.mouseY));
 };
 
 const drawPoints = (pointsArr, canvas) => {
