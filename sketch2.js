@@ -1,12 +1,18 @@
-function preload() {
-  // ++ load data here ++ //
-}
+var graphspace = function (graphCanvas) {
+  graphCanvas.setup = function () {
+    graphCanvas.createCanvas(800, 800).parent("graphCanvas");
+    bernsteinpolynome(graphCanvas, 9, 1, 0.2);
+  };
 
-function setup() {
-  canvas = createCanvas(200, 200).parent("canvas2");
-}
+  graphCanvas.draw = function () {
+    graphCanvas.background(0);
+  };
 
-function draw() {
-  sliderVal = map(document.getElementById("myRange").value, 0, 99, 0, 1);
-  background(0);
-}
+  graphCanvas.keyPressed = function () {};
+
+  graphCanvas.mousePressed = function () {};
+
+  graphCanvas.mouseReleased = function () {};
+};
+
+var myp5 = new p5(graphspace, "canvas");

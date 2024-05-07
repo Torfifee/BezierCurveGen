@@ -1,15 +1,29 @@
-export const addPoints = (canvas) => {
+function movePoints(canvas) {
+  if (
+    canvas.mouseX > 0 &&
+    canvas.mouseX < canvas.width &&
+    canvas.mouseY > 0 &&
+    canvas.mouseY < canvas.height
+  ) {
+    if (canvas.mouseIsPressed && editpoint !== -1) {
+      pointsList[editpoint].x = canvas.mouseX;
+      pointsList[editpoint].y = canvas.mouseY;
+    }
+  }
+}
+
+const addPoints = (canvas) => {
   pointsList.push(canvas.createVector(canvas.mouseX, canvas.mouseY));
 };
 
-export const drawPoints = (pointsArr, canvas) => {
+const drawPoints = (pointsArr, canvas) => {
   for (let el of pointsArr) {
     canvas.strokeWeight(15);
     canvas.point(el.x, el.y);
   }
 };
 
-export const connectPoints = (pointsArr, canvas) => {
+const connectPoints = (pointsArr, canvas) => {
   if (pointsArr.length > 1) {
     for (let i = 0; i < pointsArr.length - 1; i++) {
       canvas.strokeWeight(2);
@@ -23,7 +37,7 @@ export const connectPoints = (pointsArr, canvas) => {
   }
 };
 
-export const lerpPoints = (pointsArr, time, canvas) => {
+const lerpPoints = (pointsArr, time, canvas) => {
   let inputPoints = pointsArr;
   for (let j = 0; j < pointsArr.length; j++) {
     let outputPoints = [];
@@ -57,7 +71,7 @@ export const lerpPoints = (pointsArr, time, canvas) => {
   }
 };
 
-export const drawBezierCurve = (pointsArr, anzahlPunkte = 50, canvas) => {
+const drawBezierCurve = (pointsArr, anzahlPunkte = 50, canvas) => {
   if (pointsArr.length > 2) {
     let outputPoints = [];
     let allpoints = [];

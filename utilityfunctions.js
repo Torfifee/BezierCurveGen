@@ -5,3 +5,7 @@ const factorialOf = (number) => {
   }
   return output;
 };
+
+const bernsteinpolynome = (canvas, n, i, t) => {
+  canvas.print(binomialkoeffizient(n, i) * t ** i * (1 - t) ** (n - i));
+};

@@ -11,10 +11,10 @@
       integrity="sha512-tGZFF1kxT/c9C+kv77mKkZ9Ww1VyU8TMX6HLUSzbPrDLuptbiRFBfti8A33ip+BBIHYUsybuZD9OKLmIqdLmaQ=="
       crossorigin="anonymous"
     ></script>
-    <script src="sketch.js"></script>
-    <!-- <script src="sketch2.js"></script> -->
-    <!-- <script src="drawingfunctions.js"></script> -->
-    <!-- <script src="utilityfunctions.js"></script> -->
+    <script src="sketch2.js"></script>
+    <script src="sketch.js" async></script>
+    <script src="drawingfunctions.js"></script>
+    <script src="utilityfunctions.js"></script>
   </head>
   <body>
     <form class="controlContainer">
@@ -30,7 +30,9 @@
       <label>Show Lerps:</label>
       <input type="checkbox" class="slider" id="boolShowLerps" />
     </form>
-    <div id="canvas"></div>
-    <div id="canvas2"></div>
+    <div class="canvasGroup">
+      <div id="drawingCanvas"></div>
+      <div id="graphCanvas"></div>
+    </div>
   </body>
 </html>
