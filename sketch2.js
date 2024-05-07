@@ -1,11 +1,20 @@
 var graphspace = function (graphCanvas) {
   graphCanvas.setup = function () {
     graphCanvas.createCanvas(800, 800).parent("graphCanvas");
-    bernsteinpolynome(graphCanvas, 9, 1, 0.2);
+    graphCanvas.print(bernsteinpolynome(4, 0, 0.5));
   };
 
   graphCanvas.draw = function () {
+    sliderTimeVal = graphCanvas.map(
+      document.getElementById("sliderTimeVal").value,
+      0,
+      99,
+      0,
+      1
+    );
     graphCanvas.background(0);
+    graphCanvas.stroke(255);
+    drawBernsteinGraph(graphCanvas, 20, pointsList.length - 1, sliderTimeVal);
   };
 
   graphCanvas.keyPressed = function () {};

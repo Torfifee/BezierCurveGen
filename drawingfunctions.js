@@ -96,3 +96,19 @@ const drawBezierCurve = (pointsArr, anzahlPunkte = 50, canvas) => {
     connectPoints(allpoints, canvas);
   }
 };
+
+const drawBernsteinGraph = (canvas, steps, grad, time) => {
+  for (let j = 0; j < grad + 1; j++) {
+    let bernsteinArr = [];
+    for (let i = 0; i <= canvas.width * sliderTimeVal; i += steps) {
+      bernsteinArr.push(
+        canvas.createVector(
+          i,
+          canvas.height -
+            bernsteinpolynome(grad, j, i / canvas.width) * canvas.height
+        )
+      );
+    }
+    connectPoints(bernsteinArr, canvas);
+  }
+};
