@@ -27,8 +27,8 @@ var drawingspace = function (drawingCanvas) {
       drawingCanvas.background(0);
     drawBezierCurve(pointsList, 60, drawingCanvas);
     drawingCanvas.stroke(255);
-    drawPoints(pointsList, drawingCanvas);
     connectPoints(pointsList, drawingCanvas);
+    drawPoints(pointsList, drawingCanvas);
     lerpPoints(pointsList, sliderTimeVal, drawingCanvas);
     movePoints(drawingCanvas);
   };

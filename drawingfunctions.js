@@ -17,9 +17,13 @@ const addPoints = (canvas) => {
 };
 
 const drawPoints = (pointsArr, canvas) => {
-  for (let el of pointsArr) {
+  for (let [index, el] of pointsArr.entries()) {
     canvas.strokeWeight(15);
+    canvas.colorMode(canvas.HSB);
+    canvas.stroke((index * 30) % 255, 100, 100);
     canvas.point(el.x, el.y);
+    canvas.colorMode(canvas.RGB);
+    canvas.stroke(255);
   }
 };
 
@@ -109,6 +113,9 @@ const drawBernsteinGraph = (canvas, steps, grad, time) => {
         )
       );
     }
+    canvas.colorMode(canvas.HSB);
+    canvas.stroke((j * 30) % 255, 100, 100);
     connectPoints(bernsteinArr, canvas);
+    canvas.colorMode(canvas.RGB);
   }
 };

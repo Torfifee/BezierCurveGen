@@ -14,7 +14,7 @@ var graphspace = function (graphCanvas) {
     );
     graphCanvas.background(0);
     graphCanvas.stroke(255);
-    drawBernsteinGraph(graphCanvas, 20, pointsList.length - 1, sliderTimeVal);
+    drawBernsteinGraph(graphCanvas, 10, pointsList.length - 1, sliderTimeVal);
   };
 
   graphCanvas.keyPressed = function () {};
