@@ -1,4 +1,22 @@
-function movePoints(pointArray, canvas, moveNeighbours = false) {
+function movePoints(pointArray, canvas) {
+  mouseMovement = canvas.createVector(
+    canvas.mouseX - canvas.pmouseX,
+    canvas.mouseY - canvas.pmouseY
+  );
+  if (
+    canvas.mouseX > 0 &&
+    canvas.mouseX < canvas.width &&
+    canvas.mouseY > 0 &&
+    canvas.mouseY < canvas.height
+  ) {
+    if (canvas.mouseIsPressed && editpoint !== -1) {
+      // pointArray[editpoint].x = canvas.mouseX;
+      // pointArray[editpoint].y = canvas.mouseY;
+      pointArray[editpoint].add(mouseMovement);
+    }
+  }
+}
+function moveSplinePoints(pointArray, canvas, moveNeighbours = false) {
   mouseMovement = canvas.createVector(
     canvas.mouseX - canvas.pmouseX,
     canvas.mouseY - canvas.pmouseY

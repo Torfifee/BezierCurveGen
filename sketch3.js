@@ -31,7 +31,7 @@ var splinespace = function (splineCanvas) {
     splineCanvas;
     drawSpline(splineList, splineCanvas);
     drawPoints(splineList, splineCanvas);
-    movePoints(splineList, splineCanvas, true);
+    moveSplinePoints(splineList, splineCanvas, true);
   };
 
   splineCanvas.mousePressed = function () {
