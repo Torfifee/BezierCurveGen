@@ -9,10 +9,10 @@ let boolShowLerps = false;
 var drawingspace = function (drawingCanvas) {
   drawingCanvas.setup = function () {
     drawingCanvas.createCanvas(800, 800).parent("drawingCanvas");
-    pointsList[0] = drawingCanvas.createVector(50, 400);
-    pointsList[1] = drawingCanvas.createVector(200, 100);
-    pointsList[2] = drawingCanvas.createVector(400, 100);
-    pointsList[3] = drawingCanvas.createVector(550, 400);
+    pointsList[0] = drawingCanvas.createVector(100, 450);
+    pointsList[1] = drawingCanvas.createVector(300, 150);
+    pointsList[2] = drawingCanvas.createVector(600, 200);
+    pointsList[3] = drawingCanvas.createVector(700, 500);
   };
 
   drawingCanvas.draw = function () {
@@ -23,14 +23,15 @@ var drawingspace = function (drawingCanvas) {
       0,
       1
     );
-    (boolShowLerps = document.getElementById("boolShowLerps").checked),
-      drawingCanvas.background(0);
-    drawBezierCurve(pointsList, 60, drawingCanvas);
-    drawingCanvas.stroke(255);
+    boolShowLerps = document.getElementById("boolShowLerps").checked;
+    boolShowCurve = document.getElementById("boolShowCurve").checked;
+    drawingCanvas.background(240);
+    drawBezierCurve(pointsList, 50, drawingCanvas);
+    drawingCanvas.stroke(0);
     connectPoints(pointsList, drawingCanvas);
     drawPoints(pointsList, drawingCanvas);
     lerpPoints(pointsList, sliderTimeVal, drawingCanvas);
-    movePoints(drawingCanvas);
+    movePoints(pointsList, drawingCanvas);
   };
 
   drawingCanvas.keyPressed = function () {

@@ -1,4 +1,8 @@
-function movePoints(canvas) {
+function movePoints(pointArray, canvas, moveNeighbours = false) {
+  mouseMovement = canvas.createVector(
+    canvas.mouseX - canvas.pmouseX,
+    canvas.mouseY - canvas.pmouseY
+  );
   if (
     canvas.mouseX > 0 &&
     canvas.mouseX < canvas.width &&
@@ -6,9 +10,19 @@ function movePoints(canvas) {
     canvas.mouseY < canvas.height
   ) {
     if (canvas.mouseIsPressed && editpoint !== -1) {
-      pointsList[editpoint].x = canvas.mouseX;
-      pointsList[editpoint].y = canvas.mouseY;
+      // pointArray[editpoint].x = canvas.mouseX;
+      // pointArray[editpoint].y = canvas.mouseY;
+      pointArray[editpoint].add(mouseMovement);
     }
+  }
+
+  if (moveNeighbours && editpoint != -1 && editpoint % 3 == 0) {
+    pointArray[editpoint + 1]?.add(mouseMovement);
+    pointArray[editpoint - 1]?.add(mouseMovement);
+  } else if (moveNeighbours && editpoint != -1 && editpoint % 3 == 2) {
+    pointArray[editpoint + 2]?.sub(mouseMovement);
+  } else if (moveNeighbours && editpoint != -1 && editpoint % 3 == 1) {
+    pointArray[editpoint - 2]?.sub(mouseMovement);
   }
 }
 
@@ -20,10 +34,10 @@ const drawPoints = (pointsArr, canvas) => {
   for (let [index, el] of pointsArr.entries()) {
     canvas.strokeWeight(15);
     canvas.colorMode(canvas.HSB);
-    canvas.stroke((index * 30) % 255, 100, 100);
+    canvas.stroke((index * 30) % 255, 100, 80);
     canvas.point(el.x, el.y);
     canvas.colorMode(canvas.RGB);
-    canvas.stroke(255);
+    canvas.stroke(0);
   }
 };
 
@@ -75,11 +89,15 @@ const lerpPoints = (pointsArr, time, canvas) => {
   }
 };
 
-const drawBezierCurve = (pointsArr, anzahlPunkte = 50, canvas) => {
+const drawBezierCurve = (pointsArr, anzahlPunkte = 5, canvas) => {
   if (pointsArr.length > 2) {
     let outputPoints = [];
     let allpoints = [];
-    for (let x = 0; x <= sliderTimeVal; x += 1 / anzahlPunkte) {
+    for (
+      let x = 0;
+      x <= (boolShowCurve ? 1 : sliderTimeVal);
+      x += 1.0 / anzahlPunkte
+    ) {
       let inputPoints = pointsArr;
       for (let j = 0; j < pointsArr.length - 1; j++) {
         for (let i = 0; i < inputPoints.length - 1; i++) {
@@ -95,8 +113,34 @@ const drawBezierCurve = (pointsArr, anzahlPunkte = 50, canvas) => {
         allpoints.push(inputPoints[0]);
       }
     }
+    boolShowCurve && allpoints.push(pointsArr[pointsArr.length - 1]);
     canvas.strokeWeight(2);
     canvas.stroke(0, 0, 255);
+    connectPoints(allpoints, canvas);
+  }
+};
+const drawBezierCurveForSpline = (pointsArr, anzahlPunkte = 5, canvas) => {
+  if (pointsArr.length > 2) {
+    let outputPoints = [];
+    let allpoints = [];
+    for (let x = 0; x <= 1; x += 1.0 / anzahlPunkte) {
+      let inputPoints = pointsArr;
+      for (let j = 0; j < pointsArr.length - 1; j++) {
+        for (let i = 0; i < inputPoints.length - 1; i++) {
+          outputPoints.push(
+            p5.Vector.lerp(inputPoints[i], inputPoints[i + 1], x)
+          );
+        }
+
+        inputPoints = outputPoints;
+        outputPoints = [];
+      }
+      if (inputPoints.length == 1) {
+        allpoints.push(inputPoints[0]);
+      }
+    }
+    boolShowCurve && allpoints.push(pointsArr[pointsArr.length - 1]);
+    canvas.strokeWeight(2);
     connectPoints(allpoints, canvas);
   }
 };
@@ -114,8 +158,21 @@ const drawBernsteinGraph = (canvas, steps, grad, time) => {
       );
     }
     canvas.colorMode(canvas.HSB);
-    canvas.stroke((j * 30) % 255, 100, 100);
+    canvas.stroke((j * 30) % 255, 100, 80);
     connectPoints(bernsteinArr, canvas);
+    canvas.colorMode(canvas.RGB);
+  }
+};
+
+const drawSpline = (pointsArr, canvas) => {
+  for (let i = 0; i < (pointsArr.length - 2) / 3; i++) {
+    let currentArr = pointsArr.slice(i * 3, i * 3 + 4);
+    canvas.stroke(150);
+    connectPoints(currentArr.slice(0, 2), canvas);
+    connectPoints(currentArr.slice(2, 4), canvas);
+    canvas.colorMode(canvas.HSB);
+    canvas.stroke((i * 60) % 255, 200, 60);
+    drawBezierCurveForSpline(currentArr, 15, canvas);
     canvas.colorMode(canvas.RGB);
   }
 };

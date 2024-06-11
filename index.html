@@ -11,8 +11,9 @@
       integrity="sha512-tGZFF1kxT/c9C+kv77mKkZ9Ww1VyU8TMX6HLUSzbPrDLuptbiRFBfti8A33ip+BBIHYUsybuZD9OKLmIqdLmaQ=="
       crossorigin="anonymous"
     ></script>
-    <script src="sketch2.js"></script>
     <script src="sketch.js" async></script>
+    <script src="sketch2.js"></script>
+    <script src="sketch3.js"></script>
     <script src="drawingfunctions.js"></script>
     <script src="utilityfunctions.js"></script>
   </head>
@@ -27,10 +28,13 @@
         class="slider"
         id="sliderTimeVal"
       />
-      <label>Show Lerps:</label>
+      <label>Lineare Interpolation</label>
       <input type="checkbox" class="slider" id="boolShowLerps" />
+      <label>Ganze Kurve Anzeigen:</label>
+      <input type="checkbox" class="slider" id="boolShowCurve" />
     </form>
     <div class="canvasGroup">
+      <div id="splineCanvas"></div>
       <div id="drawingCanvas"></div>
       <div id="graphCanvas"></div>
     </div>

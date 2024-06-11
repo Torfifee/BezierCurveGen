@@ -12,8 +12,8 @@ var graphspace = function (graphCanvas) {
       0,
       1
     );
-    graphCanvas.background(0);
-    graphCanvas.stroke(255);
+    graphCanvas.background(240);
+    graphCanvas.stroke(0);
     drawBernsteinGraph(graphCanvas, 10, pointsList.length - 1, sliderTimeVal);
   };
 
